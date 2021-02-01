@@ -25,27 +25,13 @@ router = APIRouter()
 
 load_dotenv()
 
-DB_HOST = os.getenv("DB_HOST")
-DB_NAME = os.getenv("DB_NAME")
-DB_USER = os.getenv("DB_USER")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-
-#DATABASE_URL = os.environ["DATABASE_URL"]
-DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 # Connect to PG DB with Heroku (Hosted on AWS)
 
 #connection = psycopg2.connect(DATABASE_URL)
 
-# This works to connect locally (currently hosted on ElephantSQL, which hosts on AWS)
 
-connection = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASSWORD, host=DB_HOST, sslmode="require") #DATABASE_URL
-
-
-# Cursor for making SQL queries
-
-cursor = connection.cursor()
 
 
 # Get a SQLAlchemy database connection (we are using Postgres...)
@@ -82,15 +68,3 @@ async def get_url(connection=Depends(get_db)):
     url_without_password = repr(connection.engine.url)
     return {'database_url': url_without_password}
 
-
-# This looks like trash, but its a start for a more refined serve of data
-
-@router.get('/cityspire')
-async def get_table(connection=Depends(get_db)):
-    """Return table of all data from cityspire db"""
-    select_query = "SELECT * from pop_rent_crime_walk_cost_livability_bins"
-    cursor.execute(select_query)
-    records = cursor.fetchall()
-    cursor.close()
-    connection.close()
-    return json.dumps(records)
