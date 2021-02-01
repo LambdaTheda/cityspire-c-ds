@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-sqlalchemy
-psycopg2-binary
-websockets
-scikit-learn
-jupyter
-pytest
-dataclasses
