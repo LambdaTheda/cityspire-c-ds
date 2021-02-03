@@ -1,29 +1,18 @@
 [[source]]
+name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
-name = "pypi"
-
-[packages]
-pandas = "*"
-numpy = "*"
-fastapi = "*"
-uvicorn = "*"
-psycopg2-binary = "*"
-websockets = "*"
-scikit-learn = "*"
-jupyter = "*"
-pytest = "*"
-dataclasses = "*"
-python-dotenv = "*"
-SQLAlchemy = "*"
-joblib = "*"
-gunicorn = "*"
-plotly = "*"
 
 [dev-packages]
 jupyter = "*"
 pytest = "*"
-requests = "*"
+
+[packages]
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+sqlalchemy = "*"
+psycopg2-binary = "*"
+pandas = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3"
